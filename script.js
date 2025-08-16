@@ -61,7 +61,6 @@ scroller.init();
 
 /*---- script arrows----*/
 
-<script>
 (function(){
   const carousels = document.querySelectorAll('.carousel-fade');
 
