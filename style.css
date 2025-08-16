@@ -194,3 +194,54 @@ h3 {
 .card > a {
   margin-bottom: 2em;
 }
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  header {
+    height: auto; /* let it resize naturally */
+    background-attachment: scroll; /* avoid parallax bug on phones */
+  }
+
+  header hgroup {
+    padding: 0.5em 1.5em;
+    font-size: 1em;
+  }
+
+  .site nav a {
+    font-size: 1em;
+    padding: 10px 15px;
+    display: block; /* stack vertically */
+    text-align: center;
+  }
+
+  .container h1 {
+    font-size: 2rem;
+  }
+
+  .container p {
+    font-size: 1rem;
+    padding: 0.5em;
+  }
+
+  .second {
+    height: auto;  /* remove fixed height */
+    flex-direction: column; /* stack cards vertically */
+    padding: 1em;
+  }
+
+  .item {
+    max-width: 100%; /* let cards stretch to screen width */
+    margin: 0 auto 1em auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .container h1 {
+    font-size: 1.5rem;
+  }
+
+  header hgroup {
+    font-size: 0.9em;
+    padding: 0.5em 1em;
+  }
+}
