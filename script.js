@@ -73,7 +73,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let current = 0;
     let animating = false;
-    const DURATION = 350;
+    const DURATION = 500;
+    const INTERVAL = 4000; // autoplay every 4s
+    let autoPlay;
 
     const show = (nextIndex) => {
       if (animating || nextIndex === current) return;
@@ -91,7 +93,26 @@ document.addEventListener("DOMContentLoaded", () => {
       }, DURATION);
     };
 
-    btnL.addEventListener("click", () => show(current - 1));
-    btnR.addEventListener("click", () => show(current + 1));
+    const nextSlide = () => show(current + 1);
+
+    // autoplay
+    const startAutoPlay = () => {
+      stopAutoPlay();
+      autoPlay = setInterval(nextSlide, INTERVAL);
+    };
+    const stopAutoPlay = () => clearInterval(autoPlay);
+
+    // arrows
+    btnL.addEventListener("click", () => {
+      show(current - 1);
+      startAutoPlay(); // reset timer
+    });
+    btnR.addEventListener("click", () => {
+      show(current + 1);
+      startAutoPlay(); // reset timer
+    });
+
+    // start carousel
+    startAutoPlay();
   });
 });
