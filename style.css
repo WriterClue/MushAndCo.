@@ -162,18 +162,10 @@ background-color: var(--color);
 }
 
 . second {
-background-image: url(https://images.unsplash.com/photo-1514496959998-c01c40915c5f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1740&q=80);
-background-size: cover;
-background-position: center;
-background-attachment: fixed;
-}
-  
-  width: 100%;    /* span full width */
-  min-height: 1200px;  /* let content stretch, safer than fixed height */
-  
-  display: flex;  
-  flex-direction: row;
-  gap: 1.6em;
+background-image: url(https://images .unsplash.com/photo-1514496959998 -c01c40915c5f?ixlib=rb-1.2.1&auto= format&fit=crop&w=1740&q=80); 166 background-attachment: fixed; 167
+height: 1200px; 168 
+flex-direction: row; 169 
+gap: 1.6em;
 }
 
 /* Carousel wrapper */
