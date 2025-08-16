@@ -169,51 +169,69 @@ flex-direction: row;
 gap: 1.6em;
 }
 
-.container.second {
+/* Keep the carousel within your site width and position arrows correctly */
+.carousel-wrapper{
+  position: relative;     /* ← makes arrow positioning local to the wrapper */
+  max-width: 100%;
+  margin: 0 auto;
+  overflow: hidden;       /* prevents arrow area from causing page overflow */
+}
+
+/* Horizontal track */
+.container.second{
   display: flex;
-  gap: 1rem;                     /* space between cards */
-  overflow-x: auto;              /* allow horizontal scrolling */
-  scroll-snap-type: x mandatory; /* snap to cards */
+  gap: 1rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  padding: 1rem;
-  position: relative;            /* for arrow positioning */
+  padding: 0 2.5rem;      /* room under arrows (buttons are ~2.25rem) */
+  scroll-padding: 0 2.5rem;
+  max-width: 100%;
 }
 
-.container.second::-webkit-scrollbar {
-  display: none; /* hide scrollbar */
-}
+/* (optional) hide scrollbar */
+.container.second::-webkit-scrollbar{ display:none; }
+.container.second{ scrollbar-width: none; }
 
-.item {
-  flex: 0 0 80%;              /* card takes 80% width of viewport */
-  max-width: 320px;           /* cap the max size */
-  background-color: white;
-  flex-direction: column;
-  align-items: center;
-  border-radius: .5em;
-  box-shadow: 0px 29px 38px -15px rgba(0,0,0,0.43);
+/* Slides: keep your card styling; just add a responsive width + snap */
+.container.second .item{
+  flex: 0 0 85vw;         /* phones: one card per “page” */
+  max-width: 480px;
   scroll-snap-align: start;
 }
 
-/* Carousel arrows */
-.carousel-btn {
+/* Tablet: 2 cards */
+@media (min-width: 768px){
+  .container.second .item{
+    flex: 0 0 calc(50% - 1rem);
+    max-width: none;
+  }
+}
+
+/* Desktop: 3 cards */
+@media (min-width: 1024px){
+  .container.second .item{
+    flex: 0 0 calc(33.333% - 1rem);
+  }
+}
+
+/* Arrow buttons */
+.carousel-btn{
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0,0,0,0.5);
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  border-radius: 50%;
-  font-size: 1.5rem;
-  z-index: 10;
+  width: 2.25rem; height: 2.25rem;
+  display: grid; place-items: center;
+  border: none; border-radius: 999px;
+  background: rgba(0,0,0,.55);
+  color: #fff; font-size: 1.25rem;
+  cursor: pointer; z-index: 2;
 }
+.carousel-btn.left{  left: .5rem; }
+.carousel-btn.right{ right: .5rem; }
+.carousel-btn[disabled]{ opacity:.35; cursor: default; }
 
-.carousel-btn.left {
-  left: 10px;
-}
-
-.carousel-btn.right {
-  right: 10px;
-}
+/* (Optional safety) avoid page-wide sideways scrolling */
+html, body{ overflow-x: hidden; }
 
