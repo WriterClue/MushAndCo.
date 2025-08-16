@@ -1,4 +1,4 @@
-// ---------------- Scroller ----------------
+// Based on the Scroller function
 var $content = $('header .content'),
     $blur    = $('header .overlay'),
     wHeight  = $(window).height();
@@ -58,28 +58,3 @@ Scroller.prototype = {
 
 var scroller = new Scroller();
 scroller.init();
-
-
-// ---------------- Carousel ----------------
-$(document).ready(function () {
-  const $carousel = $(".carousel");
-  const $items = $(".carousel__item");
-  let index = 0;
-
-  function showSlide(i) {
-    $items.css("transform", `translateX(${-i * 100}%)`);
-  }
-
-  $(".carousel").on("click", function (e) {
-    if (e.offsetX < $(this).width() / 2) {
-      // left
-      index = (index - 1 + $items.length) % $items.length;
-    } else {
-      // right
-      index = (index + 1) % $items.length;
-    }
-    showSlide(index);
-  });
-
-  showSlide(index);
-});
