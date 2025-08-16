@@ -1,1 +1,191 @@
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css?family=Lato|Red+Hat+Text:wght@400;700&display=swap');
 
+/* Base Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Font Settings */
+html, body {
+  height: 100%;
+  font-family: 'Lato', sans-serif;
+}
+body {
+  font: 1.3em/1.5 "Lato", sans-serif;
+}
+
+/* First Design: Parallax Header */
+header {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background: url('https://via.placeholder.com/1080') center/cover no-repeat;
+}
+header .content {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 1;
+}
+header hgroup {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+  border: 5px solid #fff;
+  padding: .5em 3em;
+  background-color: rgba(0, 0, 0, 0.2);
+  font-family: 'Lato', sans-serif;
+  z-index: 2;
+}
+header .overlay {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: #333;
+  z-index: 0;
+  opacity: 0;
+  filter: blur(4px);
+}
+
+/* Navigation & Quote Section */
+.site {
+  padding: 20em 0;
+  text-align: center;
+  background-color: #efefef;
+  color: #444;
+  position: relative;
+  font-size: .8em;
+}
+.site nav {
+  position: absolute;
+  top: 0; left: 0;
+  background: #222; width: 100%;
+}
+.site nav a {
+  padding: 10px 30px;
+  font-size: 1.3em;
+  display: inline-block;
+  color: #666;
+  text-decoration: none;
+}
+.site nav a:hover {
+  background: #333;
+  color: #fff;
+}
+.site blockquote img {
+  margin-right: 20px;
+}
+.site blockquote {
+  padding: 2em;
+  display: inline-block;
+  text-align: left;
+}
+
+/* Second Design: Parallax Section */
+.parallax-second {
+  background: url('https://via.placeholder.com/1920x1080') center/cover fixed no-repeat;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container {
+  text-align: center;
+  color: #333;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Red Hat Text', sans-serif;
+}
+.container h1 {
+  font-weight: 700;
+  font-size: 3rem;
+}
+.container p {
+  max-width: 52ch;
+  line-height: 1.5;
+  padding: 1em;
+}
+.container a {
+  display: inline-block;
+  padding: 1em 3.5em;
+  background-color: #333;
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-radius: 0.3em;
+  font-weight: 700;
+  letter-spacing: .5px;
+  font-size: .875rem;
+}
+
+/* Blank Section Between */
+.blank {
+  width: 100%;
+  min-height: 60vh;
+  background-color: #333;
+}
+
+/* Activities Section */
+.activities .container.second {
+  background: url('https://via.placeholder.com/1600x900') center/cover fixed no-repeat;
+  display: flex;
+  flex-direction: row;
+  gap: 1.6em;
+  padding: 5em 0;
+}
+.item {
+  max-width: 320px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: .5em;
+  box-shadow: 0px 29px 38px -15px rgba(0,0,0,0.43);
+}
+.img {
+  width: 90%;
+  height: 200px;
+  background-color: lightgrey;
+  background-size: cover;
+  background-position: center;
+  margin-top: 20px;
+  border-radius: .3em;
+}
+.img-first {
+  background-image: url('https://via.placeholder.com/400x200?text=Img1');
+}
+.img-second {
+  background-image: url('https://via.placeholder.com/400x200?text=Img2');
+}
+.img-third {
+  background-image: url('https://via.placeholder.com/400x200?text=Img3');
+}
+.card {
+  text-align: center;
+  padding: 1em;
+}
+.card h3 {
+  font-weight: 700;
+  font-size: 1.6rem;
+  margin-top: 1em;
+}
+.card a {
+  margin-bottom: 2em;
+}
+
+/* Responsive fallback for mobile */
+@media only screen and (max-width: 768px) {
+  .parallax-second,
+  .activities .container.second {
+    background-attachment: scroll;
+  }
+  .activities .container.second {
+    flex-direction: column;
+    gap: 2em;
+  }
+}
