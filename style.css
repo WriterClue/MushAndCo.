@@ -16,7 +16,7 @@ a {
 
 /* ---------- FIRST DESIGN ---------- */
 header {
-  height: 100%;
+  min-height: 100vh; /* ✅ always full screen height */
   position: relative;
   overflow: hidden;
   background: url('https://unsplash.imgix.net/45/ZLSw0SXxThSrkXRIiCdT_DSC_0345.jpg?q=75&w=1080&h=1080&fit=max&fm=jpg&auto=format&s=857f07b76abac23a7fb7161cc7b12a46') center no-repeat;
@@ -46,8 +46,17 @@ header hgroup {
   z-index: 2;
 }
 
-header h1, header i {
+header h1 {
   margin: 0;
+  font-size: 3rem;   /* ✅ desktop size */
+  line-height: 1.2;
+}
+
+header i {
+  margin: 0;
+  font-size: 1.2rem; /* ✅ desktop subtitle size */
+  display: block;
+  margin-top: 0.5em;
 }
 
 header .overlay {
@@ -125,73 +134,4 @@ blockquote img {
 .container p {
   max-width: 52ch;
   line-height: 1.5;
-  padding: 1em;
-}
-
-.container a {
-  display: inline-block;
-  padding: 1em 3.5em;
-  background-color: var(--color);
-  color: white;
-  text-transform: uppercase;
-  border-radius: 0.3em;
-  font-weight: 700;
-  letter-spacing: .5px;
-  font-size: .875rem;
-}
-
-.blank, .other {
-  width: 100%;
-  min-height: 60vh;
-  background-color: var(--color);
-}
-
-.second {
-  background-image: url(https://images.unsplash.com/photo-1514496959998-c01c40915c5f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1740&q=80);
-  background-attachment: fixed;
-  height: 1200px;
-  flex-direction: row;
-  gap: 1.6em;
-}
-
-.item {
-  display: flex;
-  max-width: 320px;
-  background-color: white;
-  flex-direction: column;
-  align-items: center;
-  border-radius: .5em;
-  box-shadow: 0px 29px 38px -15px rgba(0,0,0,0.43);
-}
-
-.img {
-  width: 90%;
-  height: 200px;
-  background-size: cover;
-  background-position: center;
-  margin-top: 20px;
-  border-radius: .3em;
-}
-
-.img-first {
-  background-image: url(https://images.unsplash.com/photo-1522163182402-834f871fd851?ixlib=rb-1.2.1&auto=format&fit=crop&w=1606&q=80);
-}
-
-.img-second {
-  background-image: url(https://images.unsplash.com/photo-1628746404106-4d3843b231b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60);
-}
-
-.img-third {
-  background-image: url(https://images.unsplash.com/photo-1632853073412-782bf0279d65?ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80);
-}
-
-h3 {
-  font-weight: 700;
-  font-size: 1.6rem;
-  margin-top: 1em;
-}
-
-.card > a {
-  margin-bottom: 2em;
-}
-
+  padding: 1em
