@@ -162,9 +162,9 @@ background-color: var(--color);
 }
 
 . second {
-background-image: url(https://images .unsplash.com/photo-1514496959998 -c01c40915c5f?ixlib=rb-1.2.1&auto= format&fit=crop&w=1740&q=80); 166 background-attachment: fixed; 167
-height: 1200px; 168 
-flex-direction: row; 169 
+background-image: url('https://images .unsplash.com/photo-1514496959998 -c01c40915c5f?ixlib=rb-1.2.1&auto= format&fit=crop&w=1740&q=80'); background-attachment: fixed;
+height: 1200px;
+flex-direction: row;
 gap: 1.6em;
 }
 
