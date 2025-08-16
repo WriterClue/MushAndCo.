@@ -61,50 +61,83 @@ scroller.init();
 
 /*---- script arrows----*/
 
+<script>
 (function(){
-  document.querySelectorAll('.carousel-wrapper').forEach(wrapper => {
-    const track = wrapper.querySelector('.container.second');
-    const btnL  = wrapper.querySelector('.carousel-btn.left');
-    const btnR  = wrapper.querySelector('.carousel-btn.right');
-    const cards = track.querySelectorAll('.item');
+  const carousels = document.querySelectorAll('.carousel-fade');
 
-    if (cards.length === 0) return;
+  carousels.forEach(root => {
+    const track = root.querySelector('.slides');
+    const slides = Array.from(root.querySelectorAll('.slides .item'));
+    const btnL = root.querySelector('.carousel-btn.left');
+    const btnR = root.querySelector('.carousel-btn.right');
 
-    let currentIndex = 0;
+    if (!track || slides.length === 0) return;
 
-    const getStep = () => {
-      const w = cards[0].getBoundingClientRect().width;
-      const gap = parseFloat(getComputedStyle(track).gap || 0);
-      return w + gap;
+    let current = 0;
+    let animating = false;
+    const DURATION = 350; // must match CSS .35s
+
+    // Ensure only first is active on start
+    slides.forEach((s, i) => s.classList.toggle('is-active', i === 0));
+    // Set initial height to active slide
+    const setHeightToActive = () => {
+      const active = slides[current];
+      // Temporarily ensure it can be measured
+      const h = active.offsetHeight;
+      track.style.height = h + 'px';
+    };
+    setHeightToActive();
+
+    // Show slide by index (infinite wrap)
+    const show = (nextIndex) => {
+      if (animating || nextIndex === current) return;
+      animating = true;
+
+      const total = slides.length;
+      const next = ((nextIndex % total) + total) % total;
+      const prevSlide = slides[current];
+      const nextSlide = slides[next];
+
+      // Prepare height animation
+      const nextH = nextSlide.offsetHeight;
+      track.style.height = track.offsetHeight + 'px'; // lock current height
+      void track.offsetWidth; // force reflow
+      track.style.height = nextH + 'px';
+
+      // Crossfade: bring next on top, then remove prev
+      nextSlide.classList.add('is-active');
+
+      // After fade, clean up
+      setTimeout(() => {
+        prevSlide.classList.remove('is-active');
+        current = next;
+        animating = false;
+      }, DURATION + 40);
     };
 
-    const goTo = index => {
-      currentIndex = (index + cards.length) % cards.length; // wrap around
-      track.scrollTo({
-        left: currentIndex * getStep(),
-        behavior: 'smooth'
-      });
-    };
+    // Buttons
+    if (btnL) btnL.addEventListener('click', () => show(current - 1));
+    if (btnR) btnR.addEventListener('click', () => show(current + 1));
 
-    btnL.addEventListener('click', () => goTo(currentIndex - 1));
-    btnR.addEventListener('click', () => goTo(currentIndex + 1));
+    // Resize: keep height correct
+    let resizeTO;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTO);
+      resizeTO = setTimeout(() => setHeightToActive(), 100);
+    });
 
-    // Drag to scroll still works, but syncs index
-    let down=false, startX=0, startLeft=0;
+    // Optional: swipe/drag support
+    let down = false, startX = 0;
     track.addEventListener('pointerdown', e => {
-      down=true; startX=e.clientX; startLeft=track.scrollLeft;
+      down = true; startX = e.clientX;
       track.setPointerCapture(e.pointerId);
     });
-    track.addEventListener('pointermove', e => {
-      if(!down) return;
-      track.scrollLeft = startLeft - (e.clientX - startX);
+    track.addEventListener('pointerup', e => {
+      if (!down) return;
+      down = false;
+      const dx = e.clientX - startX;
+      const threshold = 40; // minimal swipe distance
+      if (dx > threshold)      show(current - 1);
+      else if (dx < -threshold) show(current + 1);
     });
-    track.addEventListener('pointerup', () => {
-      down=false;
-      currentIndex = Math.round(track.scrollLeft / getStep());
-      goTo(currentIndex); // snap to nearest card
-    });
-    track.addEventListener('pointercancel', () => down=false);
-
-    // resize safety
-    window.addEventListener('resize', () => goTo(currentIndex));
+    track.addEventListener('pointercancel', () => down = false);
