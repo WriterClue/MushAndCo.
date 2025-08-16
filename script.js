@@ -61,7 +61,6 @@ scroller.init();
 
 /*---- script arrows----*/
 
-<script>
   const container = document.querySelector('.container.second');
   const btnLeft = document.querySelector('.carousel-btn.left');
   const btnRight = document.querySelector('.carousel-btn.right');
