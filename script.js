@@ -61,18 +61,50 @@ scroller.init();
 
 /*---- script arrows----*/
 
-  const container = document.querySelector('.container.second');
-  const btnLeft = document.querySelector('.carousel-btn.left');
-  const btnRight = document.querySelector('.carousel-btn.right');
+(function(){
+  document.querySelectorAll('.carousel-wrapper').forEach(wrapper => {
+    const track = wrapper.querySelector('.container.second');
+    const btnL  = wrapper.querySelector('.carousel-btn.left');
+    const btnR  = wrapper.querySelector('.carousel-btn.right');
 
-  // Scroll amount = width of one card
-  const scrollAmount = 340; 
+    const getStep = () => {
+      const first = track.querySelector('.item');
+      if(!first) return track.clientWidth * 0.9;
+      const w = first.getBoundingClientRect().width;
+      const gap = parseFloat(getComputedStyle(track).gap || 0);
+      return w + gap;
+    };
 
-  btnLeft.addEventListener('click', () => {
-    container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    const updateButtons = () => {
+      const max = track.scrollWidth - track.clientWidth - 1;
+      btnL.disabled = track.scrollLeft <= 0;
+      btnR.disabled = track.scrollLeft >= max;
+    };
+
+    const scrollByStep = dir => {
+      track.scrollBy({ left: dir * getStep(), behavior: 'smooth' });
+      setTimeout(updateButtons, 400);
+    };
+
+    btnL.addEventListener('click', () => scrollByStep(-1));
+    btnR.addEventListener('click', () => scrollByStep(1));
+    track.addEventListener('scroll', updateButtons);
+    window.addEventListener('resize', updateButtons);
+
+    /* Drag to scroll (desktop) */
+    let down=false, startX=0, startLeft=0;
+    track.addEventListener('pointerdown', e => {
+      down=true; startX=e.clientX; startLeft=track.scrollLeft;
+      track.setPointerCapture(e.pointerId);
+    });
+    track.addEventListener('pointermove', e => {
+      if(!down) return;
+      track.scrollLeft = startLeft - (e.clientX - startX);
+    });
+    const stop=()=>down=false;
+    track.addEventListener('pointerup', stop);
+    track.addEventListener('pointercancel', stop);
+
+    updateButtons();
   });
-
-  btnRight.addEventListener('click', () => {
-    container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-  });
-</script>
+})();
