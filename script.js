@@ -61,82 +61,37 @@ scroller.init();
 
 /*---- script arrows----*/
 
-(function(){
-  const carousels = document.querySelectorAll('.carousel-fade');
+document.addEventListener("DOMContentLoaded", () => {
+  const carousels = document.querySelectorAll(".carousel-fade");
 
   carousels.forEach(root => {
-    const track = root.querySelector('.slides');
-    const slides = Array.from(root.querySelectorAll('.slides .item'));
-    const btnL = root.querySelector('.carousel-btn.left');
-    const btnR = root.querySelector('.carousel-btn.right');
+    const slides = Array.from(root.querySelectorAll(".slides .item"));
+    const btnL = root.querySelector(".carousel-btn.left");
+    const btnR = root.querySelector(".carousel-btn.right");
 
-    if (!track || slides.length === 0) return;
+    if (!slides.length) return;
 
     let current = 0;
     let animating = false;
-    const DURATION = 350; // must match CSS .35s
+    const DURATION = 350;
 
-    // Ensure only first is active on start
-    slides.forEach((s, i) => s.classList.toggle('is-active', i === 0));
-    // Set initial height to active slide
-    const setHeightToActive = () => {
-      const active = slides[current];
-      // Temporarily ensure it can be measured
-      const h = active.offsetHeight;
-      track.style.height = h + 'px';
-    };
-    setHeightToActive();
-
-    // Show slide by index (infinite wrap)
     const show = (nextIndex) => {
       if (animating || nextIndex === current) return;
       animating = true;
 
       const total = slides.length;
       const next = ((nextIndex % total) + total) % total;
-      const prevSlide = slides[current];
-      const nextSlide = slides[next];
 
-      // Prepare height animation
-      const nextH = nextSlide.offsetHeight;
-      track.style.height = track.offsetHeight + 'px'; // lock current height
-      void track.offsetWidth; // force reflow
-      track.style.height = nextH + 'px';
+      slides[next].classList.add("is-active");
 
-      // Crossfade: bring next on top, then remove prev
-      nextSlide.classList.add('is-active');
-
-      // After fade, clean up
       setTimeout(() => {
-        prevSlide.classList.remove('is-active');
+        slides[current].classList.remove("is-active");
         current = next;
         animating = false;
-      }, DURATION + 40);
+      }, DURATION);
     };
 
-    // Buttons
-    if (btnL) btnL.addEventListener('click', () => show(current - 1));
-    if (btnR) btnR.addEventListener('click', () => show(current + 1));
-
-    // Resize: keep height correct
-    let resizeTO;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTO);
-      resizeTO = setTimeout(() => setHeightToActive(), 100);
-    });
-
-    // Optional: swipe/drag support
-    let down = false, startX = 0;
-    track.addEventListener('pointerdown', e => {
-      down = true; startX = e.clientX;
-      track.setPointerCapture(e.pointerId);
-    });
-    track.addEventListener('pointerup', e => {
-      if (!down) return;
-      down = false;
-      const dx = e.clientX - startX;
-      const threshold = 40; // minimal swipe distance
-      if (dx > threshold)      show(current - 1);
-      else if (dx < -threshold) show(current + 1);
-    });
-    track.addEventListener('pointercancel', () => down = false);
+    btnL.addEventListener("click", () => show(current - 1));
+    btnR.addEventListener("click", () => show(current + 1));
+  });
+});
