@@ -1,4 +1,4 @@
-// Based on the Scroller function
+// Scroller effect
 var $content = $('header .content'),
     $blur    = $('header .overlay'),
     wHeight  = $(window).height();
@@ -45,7 +45,7 @@ Scroller.prototype = {
     if(currentScrollY > wHeight)
       $('nav').css('position','fixed');
     else
-      $('nav').css('position','absolute');
+      $('nav').css('position','relative');
 
     $content.css({
       'transform': 'translateY(' + slowScroll + 'px)',
