@@ -169,87 +169,61 @@ flex-direction: row;
 gap: 1.6em;
 }
 
-/* === FADE CAROUSEL CORE === */
+/* Wrapper */
 .carousel-fade {
   position: relative;
   max-width: 100%;
   margin: 0 auto;
-  overflow: hidden;           /* prevent any horizontal bleed */
+  overflow: hidden;
+  text-align: center;
 }
 
-/* The track that holds slides (override prior flex styles) */
+/* Slide track */
 .carousel-fade .slides {
   position: relative;
-  display: block !important;  /* override old flex row */
   width: 100%;
-  transition: height .35s ease; /* smooth height change between slides */
-  padding: 1rem 0;            /* keep your top/bottom spacing */
+  height: auto;
 }
 
-/* Each slide sits on top of each other; only one is visible */
+/* Each card */
 .carousel-fade .slides .item {
   position: absolute;
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: clamp(280px, 92vw, 480px); /* responsive card width */
-  margin: 0 auto;
+  width: clamp(280px, 92vw, 480px);
 
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
   transition: opacity .35s ease;
-  
-  /* Keep your card look (you already have these; scoped to be safe) */
-  background-color: #fff;
-  border-radius: .5em;
-  box-shadow: 0px 29px 38px -15px rgba(0,0,0,0.43);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
-/* The visible/active slide */
+/* Show active slide */
 .carousel-fade .slides .item.is-active {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  position: relative;          /* allows height measurement when active */
-}
-
-/* Your existing .img styles still apply; just ensure they size nicely */
-.carousel-fade .slides .item .img {
-  width: 90%;
-  height: 200px;
-  background-size: cover;
-  background-position: center;
-  margin-top: 20px;
-  border-radius: .3em;
+  position: relative;
 }
 
 /* Arrows */
-.carousel-fade .carousel-btn{
+.carousel-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 2.25rem;
-  height: 2.25rem;
-  display: grid;
-  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
   border: none;
   border-radius: 999px;
-  background: rgba(0,0,0,.55);
+  display: grid;
+  place-items: center;
+  background: rgba(0,0,0,.6);
   color: #fff;
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   cursor: pointer;
   z-index: 3;
 }
-.carousel-fade .carousel-btn.left  { left: .5rem; }
-.carousel-fade .carousel-btn.right { right: .5rem; }
-.carousel-fade .carousel-btn[disabled]{ opacity:.35; cursor: default; }
-
-/* Respect reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .carousel-fade .slides { transition: none; }
-  .carousel-fade .slides .item { transition: none; }
-}
+.carousel-btn.left { left: .5rem; }
+.carousel-btn.right { right: .5rem; }
 
