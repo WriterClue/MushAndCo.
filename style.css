@@ -73,18 +73,21 @@ position: relative;
 }
 
 .site nav {
-position: absolute;
-top: 0;
-left: 0;
-background: #222;
-width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #222;
+  width: 100%;
+  white-space: nowrap;   /* keep links in one line */
+  overflow-x: auto;      /* enable horizontal scroll */
+  overflow-y: hidden;    /* prevent vertical scroll */
 }
 
 .site nav a {
-padding: 10px 30px;
-font-size: 1.3em;
-display: inline-block;
-color: #666;
+  padding: 10px 30px;
+  font-size: 1.3em;
+  display: inline-block; /* keep them side by side */
+  color: #666;
 }
 
 .site nav a:hover {
