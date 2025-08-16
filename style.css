@@ -196,7 +196,9 @@ gap: 1.6em;
 
 /* Slides: keep your card styling; just add a responsive width + snap */
 .container.second .item{
-  flex: 0 0 85vw;         /* phones: one card per “page” */
+  flex: 0 0 85vw;         
+
+/* phones: one card per “page” */
   max-width: 480px;
   scroll-snap-align: start;
 }
