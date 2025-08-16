@@ -58,3 +58,22 @@ Scroller.prototype = {
 
 var scroller = new Scroller();
 scroller.init();
+
+/*---- script arrows----*/
+
+<script>
+  const container = document.querySelector('.container.second');
+  const btnLeft = document.querySelector('.carousel-btn.left');
+  const btnRight = document.querySelector('.carousel-btn.right');
+
+  // Scroll amount = width of one card
+  const scrollAmount = 340; 
+
+  btnLeft.addEventListener('click', () => {
+    container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+  });
+
+  btnRight.addEventListener('click', () => {
+    container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  });
+</script>
