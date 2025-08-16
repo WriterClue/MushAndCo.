@@ -1,121 +1,138 @@
-/* Import fonts */
-@import url('https://fonts.googleapis.com/css?family=Lato|Red+Hat+Text:wght@400;700&display=swap');
-
-/* Base Reset */
-* {
-  margin: 0;
+/* ---------- GLOBAL ---------- */
+html, body {
   padding: 0;
-  box-sizing: border-box;
+  margin: 0;
+  height: 100%;
 }
 
-/* Font Settings */
-html, body {
-  height: 100%;
+body {
+  font-size: 1.3em;
   font-family: 'Lato', sans-serif;
 }
-body {
-  font: 1.3em/1.5 "Lato", sans-serif;
+
+a {
+  text-decoration: none;
 }
 
-/* First Design: Parallax Header */
+/* ---------- FIRST DESIGN ---------- */
 header {
-  height: 100vh;
+  height: 100%;
   position: relative;
   overflow: hidden;
-  background: url('https://via.placeholder.com/1080') center/cover no-repeat;
+  background: url(https://unsplash.imgix.net/45/ZLSw0SXxThSrkXRIiCdT_DSC_0345.jpg?q=75&w=1080&h=1080&fit=max&fm=jpg&auto=format&s=857f07b76abac23a7fb7161cc7b12a46) center no-repeat;
+  background-size: cover;
 }
+
 header .content {
-  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 1;
 }
+
 header hgroup {
-  position: absolute;
-  top: 50%; left: 50%;
   transform: translate(-50%, -50%);
+  display: inline-block;
   text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
   color: #fff;
   border: 5px solid #fff;
   padding: .5em 3em;
   background-color: rgba(0, 0, 0, 0.2);
-  font-family: 'Lato', sans-serif;
   z-index: 2;
 }
-header .overlay {
-  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-  background: #333;
-  z-index: 0;
-  opacity: 0;
-  filter: blur(4px);
+
+header h1, header i {
+  margin: 0;
 }
 
-/* Navigation & Quote Section */
+header .overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: #333 center no-repeat;
+  background-size: cover;
+  z-index: 0;
+  opacity: 0;
+  -webkit-filter: blur(4px);
+}
+
 .site {
   padding: 20em 0;
   text-align: center;
   background-color: #efefef;
+  font-size: .8em;
   color: #444;
   position: relative;
-  font-size: .8em;
 }
+
 .site nav {
   position: absolute;
-  top: 0; left: 0;
-  background: #222; width: 100%;
+  top: 0;
+  left: 0;
+  background: #222;
+  width: 100%;
 }
+
 .site nav a {
   padding: 10px 30px;
   font-size: 1.3em;
   display: inline-block;
   color: #666;
-  text-decoration: none;
 }
+
 .site nav a:hover {
   background: #333;
   color: #fff;
 }
-.site blockquote img {
+
+blockquote img {
   margin-right: 20px;
 }
-.site blockquote {
-  padding: 2em;
-  display: inline-block;
-  text-align: left;
+
+/* ---------- SECOND DESIGN ---------- */
+:root {
+  --color: #333;
 }
 
-/* Second Design: Parallax Section */
-.parallax-second {
-  background: url('https://via.placeholder.com/1920x1080') center/cover fixed no-repeat;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 .container {
   text-align: center;
-  color: #333;
+  color: var(--color);
   width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: 'Red Hat Text', sans-serif;
+  background-image: url(https://images.unsplash.com/photo-1519120944692-1a8d8cfc107f?ixlib=rb-1.2.1&auto=format&fit=crop&w=872&q=80);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
+
 .container h1 {
   font-weight: 700;
   font-size: 3rem;
+  font-family: 'Red Hat Text', sans-serif;
 }
+
 .container p {
   max-width: 52ch;
   line-height: 1.5;
   padding: 1em;
 }
+
 .container a {
   display: inline-block;
   padding: 1em 3.5em;
-  background-color: #333;
+  background-color: var(--color);
   color: white;
-  text-decoration: none;
   text-transform: uppercase;
   border-radius: 0.3em;
   font-weight: 700;
@@ -123,69 +140,57 @@ header .overlay {
   font-size: .875rem;
 }
 
-/* Blank Section Between */
-.blank {
+.blank, .other {
   width: 100%;
   min-height: 60vh;
-  background-color: #333;
+  background-color: var(--color);
 }
 
-/* Activities Section */
-.activities .container.second {
-  background: url('https://via.placeholder.com/1600x900') center/cover fixed no-repeat;
-  display: flex;
+.second {
+  background-image: url(https://images.unsplash.com/photo-1514496959998-c01c40915c5f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1740&q=80);
+  background-attachment: fixed;
+  height: 1200px;
   flex-direction: row;
   gap: 1.6em;
-  padding: 5em 0;
 }
+
 .item {
+  display: flex;
   max-width: 320px;
   background-color: white;
-  display: flex;
   flex-direction: column;
   align-items: center;
   border-radius: .5em;
   box-shadow: 0px 29px 38px -15px rgba(0,0,0,0.43);
 }
+
 .img {
   width: 90%;
   height: 200px;
-  background-color: lightgrey;
   background-size: cover;
   background-position: center;
   margin-top: 20px;
   border-radius: .3em;
 }
+
 .img-first {
-  background-image: url('https://via.placeholder.com/400x200?text=Img1');
+  background-image: url(https://images.unsplash.com/photo-1522163182402-834f871fd851?ixlib=rb-1.2.1&auto=format&fit=crop&w=1606&q=80);
 }
+
 .img-second {
-  background-image: url('https://via.placeholder.com/400x200?text=Img2');
+  background-image: url(https://images.unsplash.com/photo-1628746404106-4d3843b231b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60);
 }
+
 .img-third {
-  background-image: url('https://via.placeholder.com/400x200?text=Img3');
+  background-image: url(https://images.unsplash.com/photo-1632853073412-782bf0279d65?ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80);
 }
-.card {
-  text-align: center;
-  padding: 1em;
-}
-.card h3 {
+
+h3 {
   font-weight: 700;
   font-size: 1.6rem;
   margin-top: 1em;
 }
-.card a {
-  margin-bottom: 2em;
-}
 
-/* Responsive fallback for mobile */
-@media only screen and (max-width: 768px) {
-  .parallax-second,
-  .activities .container.second {
-    background-attachment: scroll;
-  }
-  .activities .container.second {
-    flex-direction: column;
-    gap: 2em;
-  }
+.card > a {
+  margin-bottom: 2em;
 }
