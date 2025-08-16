@@ -4,59 +4,82 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mush & Co.</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Navigation -->
-  <nav class="navbar">
-    <ul class="nav-links">
-      <li><a href="#">Home</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Products</a></li>
-      <li><a href="#">Contact</a></li>
-      <li><a href="#">More</a></li>
-      <li><a href="#">Extra</a></li>
-    </ul>
-  </nav>
 
-  <!-- Hero Section -->
-  <section class="parallax hero">
-    <div class="hero-content">
-      <h1>Mush & Co.</h1>
-      <p>Minimalist warmth inspired by nature</p>
+  <!-- FIRST DESIGN -->
+  <header>
+    <div class="content">
+      <hgroup>
+        <h1>Mush & Co.</h1>
+        <i>your cozy slogan here</i>
+      </hgroup>
     </div>
-  </section>
+    <div class="overlay"></div>
+  </header>
 
-  <!-- Quote -->
-  <section class="quote">
+  <section class="site">
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Shop</a>
+      <a href="#">Blog</a>
+      <a href="#">Contact</a>
+    </nav>
     <blockquote>
-      "A cozy place where mushrooms and dreams grow together."
+      <img src="http://d.gr-assets.com/authors/1397426898p5/203714.jpg" align="left">
+      “I invented nothing new. I simply assembled the discoveries of other men behind whom were centuries of work...
+      ― Henry Ford
     </blockquote>
   </section>
 
-  <!-- Products Carousel -->
-  <section class="products">
-    <h2>Our Collection</h2>
-    <div class="carousel">
-      <button class="prev">&#10094;</button>
-      <div class="carousel-track">
-        <div class="card"><img src="https://placekitten.com/400/300"><p>Item 1</p></div>
-        <div class="card"><img src="https://placekitten.com/401/300"><p>Item 2</p></div>
-        <div class="card"><img src="https://placekitten.com/402/300"><p>Item 3</p></div>
-        <div class="card"><img src="https://placekitten.com/403/300"><p>Item 4</p></div>
+  <!-- SECOND DESIGN -->
+  <div class="container">
+    <h1>Mountain Star Zlatibor</h1>
+    <p>Zlatibor is a mountain of exceptional beauty whose special geographical properties have made this mountain a real gem of western Serbia.</p>
+    <a href="#">Learn more</a>
+  </div>
+
+  <div class="blank"></div>
+
+  <div class="container second">
+    <div class="item">
+      <div class="img img-first"></div>
+      <div class="card">
+        <h3>Rock climbing</h3>
+        <p>The goal is to reach the summit of a formation or the endpoint of a usually pre-defined route without falling.</p>
+        <a href="#">Learn more</a>
       </div>
-      <button class="next">&#10095;</button>
     </div>
-  </section>
+    <div class="item">
+      <div class="img img-second"></div>
+      <div class="card">
+        <h3>Caving</h3>
+        <p>Exploring underground through networks of tunnels and passageways, which can be natural or artificial.</p>
+        <a href="#">Learn more</a>
+      </div>
+    </div>
+    <div class="item">
+      <div class="img img-third"></div>
+      <div class="card">
+        <h3>Parachuting</h3>
+        <p>Jumping from an aeroplane and falling through the air before opening your parachute.</p>
+        <a href="#">Learn more</a>
+      </div>
+    </div>
+  </div>
 
-  <!-- Parallax Section -->
-  <section class="parallax mid"></section>
+  <div class="blank"></div>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 Mush & Co. All rights reserved.</p>
-  </footer>
-
+  <!-- JS -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
