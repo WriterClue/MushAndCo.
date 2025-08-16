@@ -161,12 +161,20 @@ min-height: 60vh;
 background-color: var(--color);
 }
 
-.second {
-  background-image: url(https://images.unsplash.com/photo-1514496959998-c01c40915c5f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1740&q=80);
-  background-attachment: fixed;
-  background-size: cover;     /* makes the image cover the entire section */
-  background-position: center; /* keeps it centered on all screens */
-  background-repeat: no-repeat; /* avoid tiling */
+. second {
+text-align: center;
+color: var(--color);
+width: 100%;
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+background-image: url(https://images.unsplash.com/photo-1514496959998-c01c40915c5f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1740&q=80);
+background-size: cover;
+background-position: center;
+background-attachment: fixed;
+}
   
   width: 100%;    /* span full width */
   min-height: 1200px;  /* let content stretch, safer than fixed height */
