@@ -78,21 +78,33 @@ position: relative;
   left: 0;
   background: #222;
   width: 100%;
-  white-space: nowrap;   /* keep links in one line */
-  overflow-x: auto;      /* enable horizontal scroll */
-  overflow-y: hidden;    /* prevent vertical scroll */
+  white-space: nowrap;   /* keep links in a single row */
+  overflow: hidden;      /* default: hide overflow on larger screens */
 }
 
 .site nav a {
   padding: 10px 30px;
   font-size: 1.3em;
-  display: inline-block; /* keep them side by side */
+  display: inline-block;
   color: #666;
 }
 
+/* Hover effect */
 .site nav a:hover {
-background: #333;
-color: #fff;
+  background: #333;
+  color: #fff;
+}
+
+/* Mobile: make it scrollable if overflow */
+@media (max-width: 768px) {
+  .site nav {
+    overflow-x: auto;     /* enable horizontal scroll */
+    -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
+  }
+
+  .site nav::-webkit-scrollbar {
+    display: none; /* optional: hide scrollbar for cleaner look */
+  }
 }
 
 blockquote img {
