@@ -1,53 +1,60 @@
-// script.js
+// Based on the Scroller function
+var $content = $('header .content'),
+    $blur    = $('header .overlay'),
+    wHeight  = $(window).height();
 
-(function() {
-  const content = document.querySelector('header .content');
-  const blurOverlay = document.querySelector('header .overlay');
-  const nav = document.querySelector('nav');
-  let windowHeight = window.innerHeight;
-  let ticking = false;
+$(window).on('resize', function(){
+  wHeight = $(window).height();
+});
 
-  const updateParallax = () => {
-    const scrollY = window.scrollY;
-    const halfScroll = scrollY * 0.5;
-    const blurOpacity = Math.min(1, scrollY * 2 / windowHeight);
-    const contentOpacity = Math.max(0, 1.4 - scrollY / 400);
-
-    content.style.transform = `translateY(${halfScroll}px)`;
-    content.style.opacity = contentOpacity;
-
-    blurOverlay.style.opacity = blurOpacity;
-
-    nav.style.position = scrollY > windowHeight ? 'fixed' : 'absolute';
-    ticking = false;
-  };
-
-  const onScroll = () => {
-    if (!ticking) {
-      window.requestAnimationFrame(updateParallax);
-      ticking = true;
-    }
-  };
-
-  const onResize = () => {
-    windowHeight = window.innerHeight;
-  };
-
-  function init() {
-    // Sync overlay with header background
-    blurOverlay.style.backgroundImage =
-      getComputedStyle(document.querySelector('header')).backgroundImage;
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onResize);
-
-    // Respect users' motion preferences
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      content.style.transition = 'none';
-      blurOverlay.style.transition = 'none';
-      return;
-    }
-  }
-
-  document.addEventListener('DOMContentLoaded', init);
+window.requestAnimFrame = (function() {
+  return window.requestAnimationFrame ||
+         window.webkitRequestAnimationFrame ||
+         window.mozRequestAnimationFrame ||
+         function(callback){ window.setTimeout(callback, 1000 / 60); };
 })();
+
+function Scroller() {
+  this.latestKnownScrollY = 0;
+  this.ticking = false;
+}
+
+Scroller.prototype = {
+  init: function() {
+    window.addEventListener('scroll', this.onScroll.bind(this), false);
+    $blur.css('background-image',$('header:first-of-type').css('background-image'));
+  },
+  onScroll: function() {
+    this.latestKnownScrollY = window.scrollY;
+    this.requestTick();
+  },
+  requestTick: function() {
+    if( !this.ticking ) {
+      window.requestAnimFrame(this.update.bind(this));
+    }
+    this.ticking = true;
+  },
+  update: function() {
+    var currentScrollY = this.latestKnownScrollY;
+    this.ticking = false;
+
+    var slowScroll = currentScrollY / 2,
+        blurScroll = currentScrollY * 2,
+        opaScroll = 1.4 - currentScrollY / 400;
+
+    if(currentScrollY > wHeight)
+      $('nav').css('position','fixed');
+    else
+      $('nav').css('position','absolute');
+
+    $content.css({
+      'transform': 'translateY(' + slowScroll + 'px)',
+      'opacity': opaScroll
+    });
+
+    $blur.css({ 'opacity': blurScroll / wHeight });
+  }
+};
+
+var scroller = new Scroller();
+scroller.init();
