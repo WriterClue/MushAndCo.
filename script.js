@@ -66,32 +66,30 @@ scroller.init();
     const track = wrapper.querySelector('.container.second');
     const btnL  = wrapper.querySelector('.carousel-btn.left');
     const btnR  = wrapper.querySelector('.carousel-btn.right');
+    const cards = track.querySelectorAll('.item');
+
+    if (cards.length === 0) return;
+
+    let currentIndex = 0;
 
     const getStep = () => {
-      const first = track.querySelector('.item');
-      if(!first) return track.clientWidth * 0.9;
-      const w = first.getBoundingClientRect().width;
+      const w = cards[0].getBoundingClientRect().width;
       const gap = parseFloat(getComputedStyle(track).gap || 0);
       return w + gap;
     };
 
-    const updateButtons = () => {
-      const max = track.scrollWidth - track.clientWidth - 1;
-      btnL.disabled = track.scrollLeft <= 0;
-      btnR.disabled = track.scrollLeft >= max;
+    const goTo = index => {
+      currentIndex = (index + cards.length) % cards.length; // wrap around
+      track.scrollTo({
+        left: currentIndex * getStep(),
+        behavior: 'smooth'
+      });
     };
 
-    const scrollByStep = dir => {
-      track.scrollBy({ left: dir * getStep(), behavior: 'smooth' });
-      setTimeout(updateButtons, 400);
-    };
+    btnL.addEventListener('click', () => goTo(currentIndex - 1));
+    btnR.addEventListener('click', () => goTo(currentIndex + 1));
 
-    btnL.addEventListener('click', () => scrollByStep(-1));
-    btnR.addEventListener('click', () => scrollByStep(1));
-    track.addEventListener('scroll', updateButtons);
-    window.addEventListener('resize', updateButtons);
-
-    /* Drag to scroll (desktop) */
+    // Drag to scroll still works, but syncs index
     let down=false, startX=0, startLeft=0;
     track.addEventListener('pointerdown', e => {
       down=true; startX=e.clientX; startLeft=track.scrollLeft;
@@ -101,10 +99,12 @@ scroller.init();
       if(!down) return;
       track.scrollLeft = startLeft - (e.clientX - startX);
     });
-    const stop=()=>down=false;
-    track.addEventListener('pointerup', stop);
-    track.addEventListener('pointercancel', stop);
+    track.addEventListener('pointerup', () => {
+      down=false;
+      currentIndex = Math.round(track.scrollLeft / getStep());
+      goTo(currentIndex); // snap to nearest card
+    });
+    track.addEventListener('pointercancel', () => down=false);
 
-    updateButtons();
-  });
-})();
+    // resize safety
+    window.addEventListener('resize', () => goTo(currentIndex));
