@@ -253,22 +253,18 @@ h3 {
   }
 }
 
-/* ✅ Desktop: 4x4 grid layout */
+/* ✅ Desktop: grid layout */
 @media (min-width: 769px) {
   .second {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 columns */
-    gap: 2em; /* spacing between cards */
-    justify-items: center; /* center horizontally */
-    align-items: start; /* align top of cards */
-    width: 100%;
-    max-width: 1400px; /* keeps it centered on big screens */
-    margin: 0 auto; /* center container */
+    grid-template-columns: repeat(4, 1fr); /* 4 cards per row */
+    gap: 1.6em;
+    justify-items: center;
     padding: 2em;
   }
 
   .item {
     width: 100%;
-    max-width: 320px; /* card width */
+    max-width: 300px; /* keeps them even */
   }
 }
