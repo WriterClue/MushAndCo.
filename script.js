@@ -58,3 +58,68 @@ Scroller.prototype = {
 
 var scroller = new Scroller();
 scroller.init();
+
+// JS: Carousel with arrows + dots
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.querySelector(".second");
+  const items = document.querySelectorAll(".item");
+  const prevBtn = document.querySelector(".arrow.prev");
+  const nextBtn = document.querySelector(".arrow.next");
+  const dotsContainer = document.querySelector(".dots");
+  const toBeAdded = document.querySelector(".to-be-added");
+
+  let page = 0;
+  const totalPages = 2; // page 0 = original cards, page 1 = "to be added"
+
+  // Create dots dynamically
+  for (let i = 0; i < totalPages; i++) {
+    const dot = document.createElement("span");
+    if (i === 0) dot.classList.add("active");
+    dotsContainer.appendChild(dot);
+  }
+  const dots = dotsContainer.querySelectorAll("span");
+
+  function updateView() {
+    if (page === 0) {
+      // Show original cards
+      toBeAdded.style.display = "none";
+      items.forEach((item, i) => { if (i < 3) item.style.display = "flex"; });
+      prevBtn.disabled = true;
+      nextBtn.disabled = false;
+    } else {
+      // Show "to be added" card
+      toBeAdded.style.display = "flex";
+      items.forEach((item, i) => { if (i < 3) item.style.display = "none"; });
+      prevBtn.disabled = false;
+      nextBtn.disabled = true;
+    }
+
+    // Update dots
+    dots.forEach((d, i) => {
+      d.classList.toggle("active", i === page);
+    });
+  }
+
+  // Arrow navigation
+  prevBtn.addEventListener("click", () => {
+    if (page > 0) {
+      page--;
+      updateView();
+    }
+  });
+
+  nextBtn.addEventListener("click", () => {
+    if (page < totalPages - 1) {
+      page++;
+      updateView();
+    }
+  });
+
+  // Dot navigation
+  dots.forEach((dot, i) => {
+    dot.addEventListener("click", () => {
+      page = i;
+      updateView();
+    });
+  });
+});
