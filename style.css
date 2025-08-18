@@ -232,15 +232,23 @@ h3 {
 /* ✅ Mobile: enable horizontal scroll */
 @media (max-width: 768px) {
   .second {
-    overflow-x: auto;
-    overflow-y: hidden;
-    flex-wrap: nowrap;
-    height: auto;
-    -webkit-overflow-scrolling: touch;
+    display: flex;
+  flex-direction: row;
+  gap: 1.6em;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 2em;
+  flex-wrap: nowrap;
+  width: 100%;
+  box-sizing: border-box: scroll-behavior: smooth;
+  background-attachment: fixed;
+ height: 1200px;
+  justify-content: flex-start;
+  align-items: flex-start;
   }
 
   .item {
-    flex: 0 0 80%;
+    flex: 0 0 320px;
     max-width: none;
   }
 }
