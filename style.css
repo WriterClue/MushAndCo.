@@ -229,41 +229,46 @@ h3 {
   gap: 1.6em;
 }
 
-/* ✅ Mobile: enable horizontal scroll */
+
+/* ✅ Mobile: horizontal scroll */
 @media (max-width: 768px) {
   .second {
     display: flex;
-  flex-direction: row;
-  gap: 1.6em;
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding: 2em;
-  flex-wrap: nowrap;
-  width: 100%;
-  box-sizing: border-box: scroll-behavior: smooth;
-  background-attachment: fixed;
- height: 1200px;
-  justify-content: flex-start;
-  align-items: flex-start;
-  }
-
-  .item {
-    flex: 0 0 320px;
-    max-width: none;
-  }
-}
-
-/* ✅ Desktop: disable sideways scroll */
-@media (min-width: 769px) {
-  .second {
-    overflow: visible;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: row;
+    gap: 1.6em;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 2em;
+    flex-wrap: nowrap;
+    width: 100%;
+    scroll-behavior: smooth;
+    justify-content: flex-start;
+    align-items: center; /* center vertically */
     height: auto;
   }
 
   .item {
-    flex: 0 0 320px;
-    max-width: 320px;
+    flex: 0 0 280px; /* card width */
+    max-width: none;
+  }
+}
+
+/* ✅ Desktop: 4x4 grid layout */
+@media (min-width: 769px) {
+  .second {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns */
+    gap: 2em; /* spacing between cards */
+    justify-items: center; /* center horizontally */
+    align-items: start; /* align top of cards */
+    width: 100%;
+    max-width: 1400px; /* keeps it centered on big screens */
+    margin: 0 auto; /* center container */
+    padding: 2em;
+  }
+
+  .item {
+    width: 100%;
+    max-width: 320px; /* card width */
   }
 }
